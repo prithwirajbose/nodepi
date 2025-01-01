@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+    {{> head}}
+    <title>NodePi - File Manager</title>
+</head>
+
+<body>
+    {{> nav}}
+
+    <main class="container-fluid text-center">
+        <div class="pt-5 rounded">
+            <h1 class="mb-2">File Manager</h1>
+            <div class="mb-4">You are here: <span class="fw-bold">/{{data.currentPath}}</span></div>
+            {{#if (noteq data.files null)}}
+            <div class="row">
+                {{#each data.files}}
+                <div class="col mb-5">
+                    <a href="/pages/filemanager?path={{this.path}}&action={{this.navAction}}" class="text-reset text-decoration-none">
+                        <div class="fs-3 fw-normal text-warning"><i class="bi bi-{{this.icon}}"></i></div>
+                        <div>{{{substrAndConcat this.name 0 20 '...'}}}</div>
+                    </a>
+                </div>
+                {{/each}}
+
+            </div>
+            {{/if}} {{#if (noteq data.fileContent null)}}
+            <textarea style="width:100%; height:500px;">{{data.fileContent}}</textarea> {{/if}}
+        </div>
+    </main>
+    {{> footer}}
+</body>
+
+</html>
